@@ -92,4 +92,69 @@ F H <BR>
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Depth First Search for the same graph was done successfully.</p>
+# PROGRAM 
+from collections import defaultdict
+import networkx as nx
+import matplotlib.pyplot as plt
+
+graph=defaultdict(list)
+G=nx.Graph()
+nodes,edges=map(int,input().split())
+for i in range(edges):
+    u,v=map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+    G.add_edge(u,v)
+nx.draw(G, with_labels=True, node_color="lightblue", edge_color="red", width=2, node_size=2000)
+plt.show()
+print(graph)
+
+#Depth First Search
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+
+    for neighbour in graph[start]:
+        if not visited[neighbour]:
+            dfs(graph, neighbour, visited, path)
+
+    return path
+
+# input start node
+start = input()
+
+path = []
+visited = defaultdict(bool)
+traversepath = dfs(graph, start, visited, path)
+print("Depth First Search:")
+print(traversepath)
+
+
+SAMPLE INPUT
+8 9
+A B
+A C
+B E
+C D
+B D
+C G
+D F
+G F
+F H
+SAMPLE OUTPUT
+['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
+
+
+SAMPLE INPUT:
+5 5
+0 1
+0 2
+0 3
+1 2
+2 4
+SAMPLE OTUPUT:
+['0', '1', '2', '3', '4']
+# OUTPUT
+<img width="932" height="671" alt="Screenshot 2026-10-27 082911" src="https://github.com/user-attachments/assets/f22a4f6c-b561-43f0-8c22-2a927361930c" />
+
 
